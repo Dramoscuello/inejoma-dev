@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividad Dinámica: Motores de Búsqueda y Navegadores Web</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      color: #007BFF;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .option {
+      background: #e9ecef;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .option:hover {
+      background: #d4d4d4;
+    }
+    .option.correct {
+      background: #d4edda;
+      color: #155724;
+    }
+    .option.wrong {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    .score {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .next-level {
+      margin-top: 20px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .next-level:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .level-indicator {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .hidden {
+      display: none;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    input {
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 80%;
+    }
+    button.start {
+      background: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button.start:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Actividad Dinámica: Motores de Búsqueda y Navegadores Web</h1>
+    <div id="start-screen" class="hidden">
+      <p>Por favor, ingresa tu nombre y apellido:</p>
+      <input type="text" id="name-input" placeholder="Nombre y Apellido">
+      <button class="start" id="start-button">Comenzar</button>
+    </div>
+    <div id="quiz-screen" class="hidden">
+      <div class="level-indicator" id="level-indicator">Nivel 1</div>
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="score" id="score">Puntos: 0</div>
+      <button class="next-level" id="nextLevel" disabled>Siguiente Nivel</button>
+    </div>
+    <div id="result-screen" class="hidden">
+      <div class="result" id="final-result"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const questions = [
+        // Nivel 1
+        {
+          question: "¿Qué es un motor de búsqueda?",
+          options: [
+            { text: "Un software que muestra páginas web", correct: false },
+            { text: "Una herramienta para encontrar información en internet", correct: true },
+            { text: "Un programa para escribir código HTML", correct: false },
+            { text: "Un sistema operativo", correct: false }
+          ]
+        },
+        // Nivel 2
+        {
+          question: "¿Cuál de estos es un navegador web?",
+          options: [
+            { text: "Google", correct: false },
+            { text: "Bing", correct: false },
+            { text: "Mozilla Firefox", correct: true },
+            { text: "Yahoo", correct: false }
+          ]
+        },
+        // Nivel 3
+        {
+          question: "¿Qué hace un navegador web?",
+          options: [
+            { text: "Busca información en la web", correct: false },
+            { text: "Interpreta y muestra páginas web", correct: true },
+            { text: "Almacena datos en la nube", correct: false },
+            { text: "Rastrea sitios web", correct: false }
+          ]
+        },
+        // Nivel 4
+        {
+          question: "¿Qué significa SEO?",
+          options: [
+            { text: "Sistema de Entrada Online", correct: false },
+            { text: "Optimización para Motores de Búsqueda", correct: true },
+            { text: "Servicio de Exploración Óptima", correct: false },
+            { text: "Seguridad Electrónica Online", correct: false }
+          ]
+        },
+        // Nivel 5
+        {
+          question: "¿Cuál de estos motores de búsqueda prioriza la privacidad?",
+          options: [
+            { text: "Google", correct: false },
+            { text: "Bing", correct: false },
+            { text: "DuckDuckGo", correct: true },
+            { text: "Yahoo", correct: false }
+          ]
+        },
+        // Nivel 6
+        {
+          question: "¿Qué función cumplen los 'spiders' en un motor de búsqueda?",
+          options: [
+            { text: "Bloquear contenido inapropiado", correct: false },
+            { text: "Rastrear y recopilar información de páginas web", correct: true },
+            { text: "Mostrar anuncios personalizados", correct: false },
+            { text: "Proteger la privacidad del usuario", correct: false }
+          ]
+        },
+        // Nivel 7
+        {
+          question: "¿Qué es el caché en un navegador web?",
+          options: [
+            { text: "Un sistema para almacenar temporalmente archivos de páginas web", correct: true },
+            { text: "Un lugar donde se guardan contraseñas", correct: false },
+            { text: "Un tipo de virus informático", correct: false },
+            { text: "Un servicio de correo electrónico", correct: false }
+          ]
+        },
+        // Nivel 8
+        {
+          question: "¿Qué diferencia a Google Chrome de otros navegadores?",
+          options: [
+            { text: "Es el único navegador que existe", correct: false },
+            { text: "Ofrece mayor velocidad y compatibilidad con tecnologías modernas", correct: true },
+            { text: "No permite instalar extensiones", correct: false },
+            { text: "Es exclusivo para dispositivos móviles", correct: false }
+          ]
+        },
+        // Nivel 9
+        {
+          question: "¿Qué son las cookies en un navegador?",
+          options: [
+            { text: "Archivos que almacenan preferencias del usuario en un sitio web", correct: true },
+            { text: "Programas maliciosos que roban datos", correct: false },
+            { text: "Un tipo de lenguaje de programación", correct: false },
+            { text: "Herramientas para rastrear correos electrónicos", correct: false }
+          ]
+        },
+        // Nivel 10
+        {
+          question: "¿Qué ocurre si un sitio web no está indexado por un motor de búsqueda?",
+          options: [
+            { text: "El sitio web no aparecerá en los resultados de búsqueda", correct: true },
+            { text: "El sitio web será más rápido", correct: false },
+            { text: "El sitio web será eliminado automáticamente", correct: false },
+            { text: "El sitio web solo será visible en navegadores específicos", correct: false }
+          ]
+        }
+      ];
+
+      let currentQuestionIndex = 0;
+      let score = 0;
+
+      const startScreen = document.getElementById('start-screen');
+      const quizScreen = document.getElementById('quiz-screen');
+      const resultScreen = document.getElementById('result-screen');
+      const nameInput = document.getElementById('name-input');
+      const startButton = document.getElementById('start-button');
+      const questionElement = document.getElementById('question');
+      const optionsElement = document.getElementById('options');
+      const scoreElement = document.getElementById('score');
+      const nextLevelButton = document.getElementById('nextLevel');
+      const levelIndicator = document.getElementById('level-indicator');
+      const finalResult = document.getElementById('final-result');
+
+      // Verificar si ya hay datos en localStorage
+      const savedData = localStorage.getItem('quizResult');
+      if (savedData) {
+        const { name, score } = JSON.parse(savedData);
+        showResult(name, score);
+      } else {
+        startScreen.classList.remove('hidden');
+      }
+
+      startButton.addEventListener('click', () => {
+        const name = nameInput.value.trim();
+        if (name) {
+          localStorage.setItem('quizName', name);
+          startScreen.classList.add('hidden');
+          quizScreen.classList.remove('hidden');
+          loadQuestion();
+        } else {
+          alert('Por favor, ingresa tu nombre y apellido.');
+        }
+      });
+
+      function loadQuestion() {
+        const currentQuestion = questions[currentQuestionIndex];
+        questionElement.textContent = currentQuestion.question;
+        optionsElement.innerHTML = '';
+        currentQuestion.options.forEach((option, index) => {
+          const button = document.createElement('div');
+          button.classList.add('option');
+          button.textContent = option.text;
+          button.addEventListener('click', () => selectOption(index, option.correct));
+          optionsElement.appendChild(button);
+        });
+        nextLevelButton.disabled = true;
+      }
+
+      function selectOption(index, isCorrect) {
+        const options = document.querySelectorAll('.option');
+        options.forEach((option, i) => {
+          if (i === index) {
+            option.classList.add(isCorrect ? 'correct' : 'wrong');
+          }
+          option.style.pointerEvents = 'none'; // Desactivar clics después de responder
+        });
+
+        if (isCorrect) {
+          score += 10;
+          scoreElement.textContent = `Puntos: ${score}`;
+        }
+
+        nextLevelButton.disabled = false;
+      }
+
+      nextLevelButton.addEventListener('click', () => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          levelIndicator.textContent = `Nivel ${currentQuestionIndex + 1}`;
+          loadQuestion();
+        } else {
+          const name = localStorage.getItem('quizName');
+          localStorage.setItem('quizResult', JSON.stringify({ name, score }));
+          showResult(name, score);
+        }
+      });
+
+      function showResult(name, score) {
+        quizScreen.classList.add('hidden');
+        resultScreen.classList.remove('hidden');
+        finalResult.textContent = `¡Felicidades, ${name}! Has completado el quiz con ${score} puntos.`;
+      }
+    });
+  </script>
+</body>
+</html>

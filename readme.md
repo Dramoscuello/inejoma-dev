@@ -10,8 +10,8 @@
 
 ## 👨💻 Desarrollador Principal
 **Deimer Ramos Cuello**  
-[![GitHub](https://img.shields.io/badge/GitHub-Profile-blue?style=flat&logo=github)](https://github.com/tu_usuario)
-[![Email](https://img.shields.io/badge/Contacto-Email-red?style=flat&logo=gmail)](mailto:tu@email.com)
+[![GitHub](https://img.shields.io/badge/GitHub-Profile-blue?style=flat&logo=github)](https://github.com/dramoscuello)
+[![Email](https://img.shields.io/badge/Contacto-Email-red?style=flat&logo=gmail)](mailto:dramoscuello@inejoma.edu.co)
 
 ---
 
