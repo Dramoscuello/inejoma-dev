@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Práctica de Teclado - Distribución Latinoamérica</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    header {
+      background-color: #0078d4;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      width: 100%;
+    }
+    main {
+      text-align: center;
+      max-width: 600px;
+      margin: 20px;
+    }
+    .teclado {
+      display: grid;
+      grid-template-columns: repeat(13, 1fr);
+      gap: 5px;
+      margin: 20px 0;
+    }
+    .tecla {
+      background-color: #e7f3fe;
+      border: 1px solid #0078d4;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .tecla.activa {
+      background-color: #0078d4;
+      color: white;
+    }
+    .instrucciones {
+      margin-bottom: 20px;
+    }
+    .resultado {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .correcto {
+      color: green;
+    }
+    .incorrecto {
+      color: red;
+    }
+    .temporizador {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0078d4;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Práctica de Teclado - Distribución Latinoamérica</h1>
+    <p>Aprende y familiarízate con la disposición del teclado latinoamericano</p>
+  </header>
+  <main>
+    <div class="instrucciones">
+      <p>Presiona las teclas que se resaltan en el teclado virtual. ¡Sigue practicando!</p>
+    </div>
+    <div class="temporizador" id="temporizador">Tiempo restante: <span id="tiempo">60</span> segundos</div>
+    <div class="resultado" id="resultado">Puntaje: <span id="puntaje">0</span></div>
+    <div class="teclado" id="teclado">
+      <!-- Fila 1 (Números) -->
+      <div class="tecla" data-tecla="1">1</div>
+      <div class="tecla" data-tecla="2">2</div>
+      <div class="tecla" data-tecla="3">3</div>
+      <div class="tecla" data-tecla="4">4</div>
+      <div class="tecla" data-tecla="5">5</div>
+      <div class="tecla" data-tecla="6">6</div>
+      <div class="tecla" data-tecla="7">7</div>
+      <div class="tecla" data-tecla="8">8</div>
+      <div class="tecla" data-tecla="9">9</div>
+      <div class="tecla" data-tecla="0">0</div>
+      <!-- Fila 2 -->
+      <div class="tecla" data-tecla="q">Q</div>
+      <div class="tecla" data-tecla="w">W</div>
+      <div class="tecla" data-tecla="e">E</div>
+      <div class="tecla" data-tecla="r">R</div>
+      <div class="tecla" data-tecla="t">T</div>
+      <div class="tecla" data-tecla="y">Y</div>
+      <div class="tecla" data-tecla="u">U</div>
+      <div class="tecla" data-tecla="i">I</div>
+      <div class="tecla" data-tecla="o">O</div>
+      <div class="tecla" data-tecla="p">P</div>
+      <!-- Fila 3 -->
+      <div class="tecla" data-tecla="a">A</div>
+      <div class="tecla" data-tecla="s">S</div>
+      <div class="tecla" data-tecla="d">D</div>
+      <div class="tecla" data-tecla="f">F</div>
+      <div class="tecla" data-tecla="g">G</div>
+      <div class="tecla" data-tecla="h">H</div>
+      <div class="tecla" data-tecla="j">J</div>
+      <div class="tecla" data-tecla="k">K</div>
+      <div class="tecla" data-tecla="l">L</div>
+      <div class="tecla" data-tecla="ñ">Ñ</div>
+      <!-- Fila 4 -->
+      <div class="tecla" data-tecla="z">Z</div>
+      <div class="tecla" data-tecla="x">X</div>
+      <div class="tecla" data-tecla="c">C</div>
+      <div class="tecla" data-tecla="v">V</div>
+      <div class="tecla" data-tecla="b">B</div>
+      <div class="tecla" data-tecla="n">N</div>
+      <div class="tecla" data-tecla="m">M</div>
+    </div>
+  </main>
+
+  <script>
+    const teclado = document.getElementById('teclado');
+    const resultado = document.getElementById('resultado');
+    const puntajeElement = document.getElementById('puntaje');
+    const tiempoElement = document.getElementById('tiempo');
+    let teclaActual = null;
+    let puntaje = 0;
+    let tiempoRestante = 60;
+    let temporizador;
+
+    // Función para seleccionar una tecla aleatoria
+    function seleccionarTeclaAleatoria() {
+      const teclas = Array.from(teclado.querySelectorAll('.tecla'));
+      if (teclaActual) {
+        teclaActual.classList.remove('activa');
+      }
+      const indiceAleatorio = Math.floor(Math.random() * teclas.length);
+      teclaActual = teclas[indiceAleatorio];
+      teclaActual.classList.add('activa');
+    }
+
+    // Evento para detectar la tecla presionada
+    document.addEventListener('keydown', (event) => {
+      if (tiempoRestante <= 0) return; // No permitir más interacciones cuando el tiempo se acabe
+
+      const teclaPresionada = event.key.toLowerCase();
+      const teclaEsperada = teclaActual.getAttribute('data-tecla').toLowerCase();
+
+      if (teclaPresionada === teclaEsperada) {
+        puntaje++;
+        puntajeElement.textContent = puntaje;
+        seleccionarTeclaAleatoria();
+      }
+    });
+
+    // Iniciar el temporizador
+    function iniciarTemporizador() {
+      temporizador = setInterval(() => {
+        tiempoRestante--;
+        tiempoElement.textContent = tiempoRestante;
+
+        if (tiempoRestante <= 0) {
+          clearInterval(temporizador);
+          tiempoElement.textContent = "¡Tiempo terminado!";
+          resultado.innerHTML = `<p class="correcto">Tu puntaje final es: ${puntaje}</p>`;
+          teclaActual.classList.remove('activa'); // Desactivar la última tecla
+        }
+      }, 1000);
+    }
+
+    // Iniciar el juego al cargar la página
+    window.onload = () => {
+      seleccionarTeclaAleatoria();
+      iniciarTemporizador();
+    };
+  </script>
+</body>
+</html>
