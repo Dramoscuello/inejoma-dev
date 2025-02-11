@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuarta Revolución Industrial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .slides {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+        .slide {
+            flex: none;
+            width: 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+        }
+        .slide:nth-child(odd) {
+            background-color: #e9f5ff;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+        }
+        p {
+            font-size: 1.2em;
+            color: #555;
+            margin: 20px;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .nav-dot {
+            width: 15px;
+            height: 15px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .nav-dot.active {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="slides">
+        <div class="slide">
+            <h1>Cuarta Revolución Industrial</h1>
+            <p>Conoce las tendencias tecnológicas que están transformando el mundo.</p>
+        </div>
+        <div class="slide">
+            <h1>Internet de las Cosas (IoT)</h1>
+            <p>Conexión de dispositivos cotidianos a internet para recopilar y compartir datos en tiempo real.</p>
+        </div>
+        <div class="slide">
+            <h1>Inteligencia Artificial (IA)</h1>
+            <p>Sistemas capaces de aprender, razonar y tomar decisiones de manera autónoma.</p>
+        </div>
+        <div class="slide">
+            <h1>Big Data</h1>
+            <p>Análisis masivo de datos para obtener información valiosa y predecir tendencias.</p>
+        </div>
+        <div class="slide">
+            <h1>Robótica Avanzada</h1>
+            <p>Máquinas inteligentes que realizan tareas complejas con precisión y eficiencia.</p>
+        </div>
+        <div class="slide">
+            <h1>Realidad Virtual (VR) y Realidad Aumentada (AR)</h1>
+            <p>Experiencias inmersivas que combinan lo digital con el mundo físico.</p>
+        </div>
+        <div class="slide">
+            <h1>Blockchain y Criptomonedas</h1>
+            <p>Tecnología descentralizada para transacciones seguras y transparentes.</p>
+        </div>
+    </div>
+    <div class="navigation">
+        <div class="nav-dot active" onclick="goToSlide(0)"></div>
+        <div class="nav-dot" onclick="goToSlide(1)"></div>
+        <div class="nav-dot" onclick="goToSlide(2)"></div>
+        <div class="nav-dot" onclick="goToSlide(3)"></div>
+        <div class="nav-dot" onclick="goToSlide(4)"></div>
+        <div class="nav-dot" onclick="goToSlide(5)"></div>
+        <div class="nav-dot" onclick="goToSlide(6)"></div>
+    </div>
+    <script>
+        const slides = document.querySelector('.slides');
+        const dots = document.querySelectorAll('.nav-dot');
+
+        function goToSlide(index) {
+            slides.scrollTo({
+                left: window.innerWidth * index,
+                behavior: 'smooth'
+            });
+            updateDots(index);
+        }
+
+        function updateDots(index) {
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        slides.addEventListener('scroll', () => {
+            const index = Math.round(slides.scrollLeft / window.innerWidth);
+            updateDots(index);
+        });
+
+        window.addEventListener('resize', () => {
+            slides.scrollTo({
+                left: window.innerWidth * Array.from(dots).findIndex(dot => dot.classList.contains('active')),
+                behavior: 'auto'
+            });
+        });
+    </script>
+</body>
+</html>
