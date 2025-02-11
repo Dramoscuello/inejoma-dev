@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trivia: Introducción a Microsoft Word</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #0078d4;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    main {
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h2 {
+      color: #0078d4;
+    }
+    .pregunta {
+      background-color: #e7f3fe;
+      border-left: 5px solid #0078d4;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+    .opciones label {
+      display: block;
+      margin: 5px 0;
+    }
+    button {
+      display: block;
+      background-color: #0078d4;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #005bb5;
+    }
+    .resultado {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .correcto {
+      color: green;
+    }
+    .incorrecto {
+      color: red;
+    }
+    .oculto {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Trivia: Introducción a Microsoft Word</h1>
+    <p>Pon a prueba tus conocimientos sobre Microsoft Word</p>
+  </header>
+  <main>
+    <div id="quiz" class="oculto">
+      <div id="pregunta1" class="pregunta">
+        <h2>Pregunta 1</h2>
+        <p>¿Qué es Microsoft Word?</p>
+        <div class="opciones">
+          <label><input type="radio" name="p1" value="a"> a) Un videojuego.</label>
+          <label><input type="radio" name="p1" value="b"> b) Una herramienta para escribir y editar documentos.</label>
+          <label><input type="radio" name="p1" value="c"> c) Un navegador web.</label>
+        </div>
+      </div>
+      <div id="pregunta2" class="pregunta">
+        <h2>Pregunta 2</h2>
+        <p>¿Para qué se utiliza Microsoft Word?</p>
+        <div class="opciones">
+          <label><input type="radio" name="p2" value="a"> a) Para jugar en línea.</label>
+          <label><input type="radio" name="p2" value="b"> b) Para crear presentaciones animadas.</label>
+          <label><input type="radio" name="p2" value="c"> c) Para escribir cartas, informes y proyectos escolares.</label>
+        </div>
+      </div>
+      <div id="pregunta3" class="pregunta">
+        <h2>Pregunta 3</h2>
+        <p>¿Qué puedes hacer en Word para organizar información de forma ordenada?</p>
+        <div class="opciones">
+          <label><input type="radio" name="p3" value="a"> a) Crear viñetas o números.</label>
+          <label><input type="radio" name="p3" value="b"> b) Dibujar formas sin texto.</label>
+          <label><input type="radio" name="p3" value="c"> c) Solo escribir párrafos largos.</label>
+        </div>
+      </div>
+      <div id="pregunta4" class="pregunta">
+        <h2>Pregunta 4</h2>
+        <p>¿Qué tipo de elementos puedes insertar en un documento de Word?</p>
+        <div class="opciones">
+          <label><input type="radio" name="p4" value="a"> a) Solo texto.</label>
+          <label><input type="radio" name="p4" value="b"> b) Texto e imágenes.</label>
+          <label><input type="radio" name="p4" value="c"> c) Texto, imágenes, tablas y formas.</label>
+        </div>
+      </div>
+      <div id="pregunta5" class="pregunta">
+        <h2>Pregunta 5</h2>
+        <p>¿Qué ventaja tiene Microsoft Word al guardar tus documentos?</p>
+        <div class="opciones">
+          <label><input type="radio" name="p5" value="a"> a) No se pueden guardar ni compartir.</label>
+          <label><input type="radio" name="p5" value="b"> b) Puedes guardarlos y abrirlos más tarde, además de compartirlos.</label>
+          <label><input type="radio" name="p5" value="c"> c) Solo puedes imprimirlos una vez.</label>
+        </div>
+      </div>
+      <button onclick="calificarTrivia()">Enviar respuestas</button>
+    </div>
+    <div id="resultado" class="resultado oculto"></div>
+  </main>
+
+  <script>
+    // Verificar si el quiz ya fue completado usando localStorage
+    const quizCompletado = localStorage.getItem('quizCompletado');
+    const puntajeGuardado = localStorage.getItem('puntaje');
+
+    if (quizCompletado === 'true') {
+      mostrarResultadoFinal(puntajeGuardado);
+    } else {
+      document.getElementById('quiz').classList.remove('oculto');
+    }
+
+    function calificarTrivia() {
+      // Obtener las respuestas seleccionadas
+      const respuesta1 = document.querySelector('input[name="p1"]:checked');
+      const respuesta2 = document.querySelector('input[name="p2"]:checked');
+      const respuesta3 = document.querySelector('input[name="p3"]:checked');
+      const respuesta4 = document.querySelector('input[name="p4"]:checked');
+      const respuesta5 = document.querySelector('input[name="p5"]:checked');
+
+      let puntaje = 0;
+
+      // Validar las respuestas
+      if (respuesta1 && respuesta1.value === "b") puntaje++;
+      if (respuesta2 && respuesta2.value === "c") puntaje++;
+      if (respuesta3 && respuesta3.value === "a") puntaje++;
+      if (respuesta4 && respuesta4.value === "c") puntaje++;
+      if (respuesta5 && respuesta5.value === "b") puntaje++;
+
+      // Guardar el estado del quiz y el puntaje en localStorage
+      localStorage.setItem('quizCompletado', 'true');
+      localStorage.setItem('puntaje', puntaje);
+
+      // Mostrar el resultado final
+      mostrarResultadoFinal(puntaje);
+    }
+
+    function mostrarResultadoFinal(puntaje) {
+      const resultadoDiv = document.getElementById('resultado');
+      resultadoDiv.innerHTML = `
+        <p>Tu puntaje final es: <strong>${puntaje}/5</strong></p>
+        ${puntaje === 5 ? '<p class="correcto">¡Excelente! Has respondido todas las preguntas correctamente.</p>' : ''}
+        ${puntaje >= 3 && puntaje < 5 ? '<p class="incorrecto">Bien hecho, pero puedes mejorar.</p>' : ''}
+        ${puntaje < 3 ? '<p class="incorrecto">Sigue practicando. Puedes hacerlo mejor la próxima vez.</p>' : ''}
+      `;
+      resultadoDiv.classList.remove('oculto');
+      document.getElementById('quiz').classList.add('oculto');
+    }
+  </script>
+</body>
+</html>
