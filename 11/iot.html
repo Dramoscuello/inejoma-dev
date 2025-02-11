@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slides: IoT - Internet de las Cosas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .slides {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+        .slide {
+            flex: none;
+            width: 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+            position: relative;
+        }
+        .slide:nth-child(odd) {
+            background-color: #e9f5ff;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+        }
+        p {
+            font-size: 1.2em;
+            color: #555;
+            margin: 20px;
+        }
+        ul {
+            text-align: left;
+            margin: 20px auto;
+            max-width: 60%;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .nav-dot {
+            width: 15px;
+            height: 15px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .nav-dot.active {
+            background-color: #333;
+        }
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="slides">
+        <!-- Slide 1: Introducción -->
+        <div class="slide">
+            <h1>¿Qué es IoT?</h1>
+            <p>El Internet de las Cosas (IoT) es una red de dispositivos físicos interconectados que recopilan y comparten datos a través de internet.</p>
+        </div>
+
+        <!-- Slide 2: Componentes del IoT -->
+        <div class="slide">
+            <h1>Componentes Clave del IoT</h1>
+            <p>Los sistemas IoT se componen de:</p>
+            <ul>
+                <li><strong>Sensores:</strong> Recopilan datos del entorno.</li>
+                <li><strong>Conectividad:</strong> Envían datos a la nube o servidores.</li>
+                <li><strong>Procesamiento de Datos:</strong> Analizan y toman decisiones.</li>
+                <li><strong>Interfaz de Usuario:</strong> Permiten interactuar con los dispositivos.</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: Aplicaciones del IoT -->
+        <div class="slide">
+            <h1>Aplicaciones del IoT</h1>
+            <p>El IoT tiene aplicaciones en diversos sectores:</p>
+            <ul>
+                <li><strong>Hogares Inteligentes:</strong> Control de luces, termostatos y seguridad.</li>
+                <li><strong>Ciudades Inteligentes:</strong> Gestión del tráfico, energía y residuos.</li>
+                <li><strong>Salud:</strong> Monitoreo remoto de pacientes.</li>
+                <li><strong>Agricultura:</strong> Sensores para optimizar riego y cosechas.</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: Ejemplos de IoT -->
+        <div class="slide">
+            <h1>Ejemplos de IoT</h1>
+            <p>A continuación, algunos ejemplos prácticos de IoT:</p>
+            <ul>
+                <li><strong>Termostatos Inteligentes:</strong> Ajustan automáticamente la temperatura según los hábitos del usuario.</li>
+                <li><strong>Asistentes de Voz:</strong> Dispositivos como Alexa o Google Assistant controlan otros aparatos mediante comandos de voz.</li>
+                <li><strong>Vehículos Conectados:</strong> Automóviles que monitorean su estado y ofrecen navegación inteligente.</li>
+                <li><strong>Sistemas de Riego Inteligente:</strong> Sensores que detectan la humedad del suelo y activan el riego cuando es necesario.</li>
+                <li><strong>Dispositivos Médicos:</strong> Pulseras de salud que monitorean el ritmo cardíaco y otras métricas vitales.</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: Beneficios del IoT -->
+        <div class="slide">
+            <h1>Beneficios del IoT</h1>
+            <p>El IoT ofrece múltiples ventajas:</p>
+            <ul>
+                <li><strong>Eficiencia:</strong> Optimiza recursos y reduce costos.</li>
+                <li><strong>Conveniencia:</strong> Automatiza tareas cotidianas.</li>
+                <li><strong>Sostenibilidad:</strong> Reduce el impacto ambiental.</li>
+                <li><strong>Innovación:</strong> Abre nuevas oportunidades tecnológicas.</li>
+            </ul>
+        </div>
+
+        <!-- Slide 6: Desafíos del IoT -->
+        <div class="slide">
+            <h1>Desafíos del IoT</h1>
+            <p>A pesar de sus beneficios, el IoT enfrenta desafíos importantes:</p>
+            <ul>
+                <li><strong>Seguridad:</strong> Vulnerabilidades en la protección de datos.</li>
+                <li><strong>Privacidad:</strong> Uso indebido de información personal.</li>
+                <li><strong>Interoperabilidad:</strong> Dificultad para integrar dispositivos de diferentes fabricantes.</li>
+                <li><strong>Escalabilidad:</strong> Manejo de grandes volúmenes de datos.</li>
+            </ul>
+        </div>
+
+        <!-- Slide 7: Conclusión -->
+        <div class="slide">
+            <h1>Conclusión</h1>
+            <p>El IoT es una tecnología transformadora que está revolucionando la forma en que interactuamos con el mundo. Su potencial es enorme, pero también debemos abordar sus desafíos para garantizar un futuro seguro y sostenible.</p>
+        </div>
+    </div>
+    <div class="navigation">
+        <div class="nav-dot active" onclick="goToSlide(0)"></div>
+        <div class="nav-dot" onclick="goToSlide(1)"></div>
+        <div class="nav-dot" onclick="goToSlide(2)"></div>
+        <div class="nav-dot" onclick="goToSlide(3)"></div>
+        <div class="nav-dot" onclick="goToSlide(4)"></div>
+        <div class="nav-dot" onclick="goToSlide(5)"></div>
+        <div class="nav-dot" onclick="goToSlide(6)"></div>
+    </div>
+    <script>
+        const slides = document.querySelector('.slides');
+        const dots = document.querySelectorAll('.nav-dot');
+
+        function goToSlide(index) {
+            slides.scrollTo({
+                left: window.innerWidth * index,
+                behavior: 'smooth'
+            });
+            updateDots(index);
+        }
+
+        function updateDots(index) {
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        slides.addEventListener('scroll', () => {
+            const index = Math.round(slides.scrollLeft / window.innerWidth);
+            updateDots(index);
+        });
+
+        window.addEventListener('resize', () => {
+            slides.scrollTo({
+                left: window.innerWidth * Array.from(dots).findIndex(dot => dot.classList.contains('active')),
+                behavior: 'auto'
+            });
+        });
+    </script>
+</body>
+</html>
